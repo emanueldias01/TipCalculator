@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -21,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -68,7 +70,10 @@ fun ScreenCalculator(modifier: Modifier = Modifier){
 
         Spacer(modifier = Modifier.height(30.dp))
 
-        TextFieldsForCalculator(bill = billInput, onChangeBill = {billInput = it}, percent = percentInput, onChangePercent = {percentInput = it})
+        TextFieldsForCalculator(bill = billInput,
+            onChangeBill = {billInput = it},
+            percent = percentInput, onChangePercent = {percentInput = it}
+        )
 
         Spacer(modifier = Modifier.height(30.dp))
 
@@ -92,7 +97,8 @@ fun TextFieldsForCalculator(
     TextField(
         value = bill,
         onValueChange = onChangeBill,
-        label = { Text(text = stringResource(id = R.string.bill))}
+        label = { Text(text = stringResource(id = R.string.bill))},
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
 
     Spacer(modifier = Modifier.height(10.dp))
@@ -100,7 +106,8 @@ fun TextFieldsForCalculator(
     TextField(
         value = percent,
         onValueChange = onChangePercent,
-        label = { Text(text = stringResource(id = R.string.percent))}
+        label = { Text(text = stringResource(id = R.string.percent))},
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
 }
 
