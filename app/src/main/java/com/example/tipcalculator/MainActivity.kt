@@ -42,7 +42,14 @@ class MainActivity : ComponentActivity() {
 fun ScreenCalculator(modifier: Modifier = Modifier){
     
     var billInput by remember { mutableStateOf("") }
+
     var percentInput by remember { mutableStateOf("") }
+
+    val bill = billInput.toDoubleOrNull() ?: 0.0
+
+    val percentage = percentInput.toDoubleOrNull() ?: 0.0
+
+    val tip = calculateValueTip(value = bill, percentage = percentage)
     
     Column(
         modifier = Modifier
@@ -67,7 +74,7 @@ fun ScreenCalculator(modifier: Modifier = Modifier){
 
 
         Text(
-            text = stringResource(id = R.string.description_tip) + " 0.00$",
+            text = stringResource(id = R.string.description_tip) + " " + tip + "$",
             fontSize = 30.sp,
             modifier = modifier.align(alignment = Alignment.Start)
             )
@@ -97,8 +104,9 @@ fun TextFieldsForCalculator(
     )
 }
 
-fun calculateValueTip(value : Double, percentage : Double){
-
+fun calculateValueTip(value : Double, percentage : Double) : Double{
+    val perc = percentage/100
+    return value*perc
 }
 
 @Preview(showBackground = true)
