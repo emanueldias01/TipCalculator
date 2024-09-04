@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tipcalculator.ui.theme.TipCalculatorTheme
+import java.text.NumberFormat
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +57,7 @@ fun ScreenCalculator(modifier: Modifier = Modifier){
     Column(
         modifier = Modifier
             .statusBarsPadding()
-            .padding(horizontal = 40.dp, vertical = 20.dp)
+            .padding(horizontal = 40.dp, vertical = 50.dp)
             .safeDrawingPadding(),
         horizontalAlignment = Alignment.Start,
 
@@ -65,7 +66,7 @@ fun ScreenCalculator(modifier: Modifier = Modifier){
         Text(
             text = stringResource(id = R.string.app_name),
             fontSize = 30.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
         )
 
         Spacer(modifier = Modifier.height(30.dp))
@@ -79,9 +80,14 @@ fun ScreenCalculator(modifier: Modifier = Modifier){
 
 
         Text(
-            text = stringResource(id = R.string.description_tip) + " " + tip + "$",
+            text = stringResource(id = R.string.description_tip),
             fontSize = 30.sp,
-            modifier = modifier.align(alignment = Alignment.Start)
+            modifier = modifier.align(alignment = Alignment.Start).padding(bottom = 10.dp)
+            )
+
+        Text(
+            text = "$tip ",
+            fontSize = 25.sp
             )
     }
 }
@@ -101,7 +107,7 @@ fun TextFieldsForCalculator(
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
 
-    Spacer(modifier = Modifier.height(10.dp))
+    Spacer(modifier = Modifier.height(30.dp))
 
     TextField(
         value = percent,
@@ -111,9 +117,10 @@ fun TextFieldsForCalculator(
     )
 }
 
-fun calculateValueTip(value : Double, percentage : Double) : Double{
+fun calculateValueTip(value : Double, percentage : Double) : String {
     val perc = percentage/100
-    return value*perc
+    val tip = value*perc
+    return NumberFormat.getCurrencyInstance().format(tip)
 }
 
 @Preview(showBackground = true)
