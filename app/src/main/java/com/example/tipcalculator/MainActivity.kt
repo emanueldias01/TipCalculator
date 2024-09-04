@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -20,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -82,7 +84,9 @@ fun ScreenCalculator(modifier: Modifier = Modifier){
         Text(
             text = stringResource(id = R.string.description_tip),
             fontSize = 30.sp,
-            modifier = modifier.align(alignment = Alignment.Start).padding(bottom = 10.dp)
+            modifier = modifier
+                .align(alignment = Alignment.Start)
+                .padding(bottom = 10.dp)
             )
 
         Text(
@@ -104,7 +108,8 @@ fun TextFieldsForCalculator(
         value = bill,
         onValueChange = onChangeBill,
         label = { Text(text = stringResource(id = R.string.bill))},
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        leadingIcon = { Icon(painter = painterResource(id = R.drawable.money), contentDescription = "bill_image")}
     )
 
     Spacer(modifier = Modifier.height(30.dp))
@@ -113,7 +118,8 @@ fun TextFieldsForCalculator(
         value = percent,
         onValueChange = onChangePercent,
         label = { Text(text = stringResource(id = R.string.percent))},
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        leadingIcon = { Icon(painter = painterResource(id = R.drawable.percent), contentDescription = "percent_image")}
     )
 }
 
