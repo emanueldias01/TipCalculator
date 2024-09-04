@@ -4,15 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -44,7 +41,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ScreenCalculator(modifier: Modifier = Modifier){
     
-    var valueInput by remember { mutableStateOf("") }
+    var billInput by remember { mutableStateOf("") }
+    var percentInput by remember { mutableStateOf("") }
     
     Column(
         modifier = Modifier
@@ -63,7 +61,7 @@ fun ScreenCalculator(modifier: Modifier = Modifier){
 
         Spacer(modifier = Modifier.height(30.dp))
 
-        TextFieldsForCalculator(value = valueInput, onChangeValue = {valueInput = it})
+        TextFieldsForCalculator(bill = billInput, onChangeBill = {billInput = it}, percent = percentInput, onChangePercent = {percentInput = it})
 
         Spacer(modifier = Modifier.height(30.dp))
 
@@ -79,14 +77,23 @@ fun ScreenCalculator(modifier: Modifier = Modifier){
 @Composable
 fun TextFieldsForCalculator(
     modifier: Modifier = Modifier,
-    value : String,
-    onChangeValue : (String) -> Unit
+    bill : String,
+    percent : String,
+    onChangePercent: (String) -> Unit,
+    onChangeBill : (String) -> Unit
 ){
     TextField(
-        value = value,
-        onValueChange = onChangeValue,
+        value = bill,
+        onValueChange = onChangeBill,
         label = { Text(text = stringResource(id = R.string.bill))}
+    )
 
+    Spacer(modifier = Modifier.height(10.dp))
+
+    TextField(
+        value = percent,
+        onValueChange = onChangePercent,
+        label = { Text(text = stringResource(id = R.string.percent))}
     )
 }
 
