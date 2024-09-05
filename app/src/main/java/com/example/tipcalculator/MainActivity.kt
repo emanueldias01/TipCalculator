@@ -123,7 +123,7 @@ fun TextFieldsForCalculator(
     )
 }
 
-fun calculateValueTip(value : Double, percentage : Double) : String {
+internal fun calculateValueTip(value : Double, percentage : Double) : String {
     val perc = percentage/100
     val tip = value*perc
     return NumberFormat.getCurrencyInstance().format(tip)
